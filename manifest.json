@@ -6,5 +6,5 @@
   "UniqueID": "irocendar.LightRadius",
   "EntryDll": "LightRadiusMod.dll",
   "MinimumApiVersion": "4.0.0",
-  "UpdateKeys": []
+  "UpdateKeys": [ "Nexus:30136" ]
 }

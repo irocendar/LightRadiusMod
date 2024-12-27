@@ -1,7 +1,7 @@
 {
   "Name": "Light Radius Mod",
   "Author": "irocendar",
-  "Version": "0.1.1",
+  "Version": "0.1.2",
   "Description": "Change the light radius of furniture and objects.",
   "UniqueID": "irocendar.LightRadius",
   "EntryDll": "LightRadiusMod.dll",

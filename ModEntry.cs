@@ -53,6 +53,7 @@ namespace LightRadiusMod
             private static IMonitor _monitor;
             private static ModConfig _config;
             private static IManifest _manifest;
+            private static int num = 1;
 
             // call this method from your Entry class
             internal static void Initialize(IMonitor monitor, ModConfig config, IManifest manifest)
@@ -73,9 +74,12 @@ namespace LightRadiusMod
                 if (__instance.furniture_type.Value == 7 || __instance.furniture_type.Value == 17 ||
                     __instance.QualifiedItemId == "(F)1369")
                 {
+                    if (!__instance.modData.ContainsKey("{this.ModManifest.UniqueID}/base-radius"))
+                        __instance.modData.Add("{this.ModManifest.UniqueID}/base-radius", __instance.lightSource.radius.Value.ToString());
                     int textureIndex = __instance.lightSource.textureIndex.Value;
                     Vector2 position = __instance.lightSource.position.Value;
-                    float radius = __instance.lightSource.radius.Value * _config.FurnitureLightRadius;
+                    int.TryParse(__instance.modData["{this.ModManifest.UniqueID}/base-radius"], out int baseRadius);
+                    float radius = baseRadius * _config.FurnitureLightRadius;
                     Color color = __instance.lightSource.color.Value;
                     string id = __instance.lightSource.Id;
                     LightSource.LightContext lightContext = __instance.lightSource.lightContext.Value;
@@ -90,9 +94,12 @@ namespace LightRadiusMod
             {
                 if (__instance.lightSource != null)
                 {
+                    if (!__instance.modData.ContainsKey("{this.ModManifest.UniqueID}/base-radius"))
+                        __instance.modData.Add("{this.ModManifest.UniqueID}/base-radius", __instance.lightSource.radius.Value.ToString());
                     int textureIndex = __instance.lightSource.textureIndex.Value;
                     Vector2 position = __instance.lightSource.position.Value;
-                    float radius = __instance.lightSource.radius.Value * _config.ObjectLightRadius;
+                    int.TryParse(__instance.modData["{this.ModManifest.UniqueID}/base-radius"], out int baseRadius);
+                    float radius = baseRadius * _config.ObjectLightRadius;
                     Color color = __instance.lightSource.color.Value;
                     string id = __instance.lightSource.Id;
                     LightSource.LightContext lightContext = __instance.lightSource.lightContext.Value;
@@ -114,8 +121,8 @@ namespace LightRadiusMod
             configMenu.Register(
                 mod: this.ModManifest,
                 reset: () => this.Config = new ModConfig(),
-                save: () => this.Helper.WriteConfig(this.Config),
-                titleScreenOnly: true
+                save: () => this.Helper.WriteConfig(this.Config)//,
+                // titleScreenOnly: true
             );
             
             configMenu.AddNumberOption(

@@ -78,7 +78,7 @@ namespace LightRadiusMod
                         __instance.modData.Add("{this.ModManifest.UniqueID}/base-radius", __instance.lightSource.radius.Value.ToString());
                     int textureIndex = __instance.lightSource.textureIndex.Value;
                     Vector2 position = __instance.lightSource.position.Value;
-                    int.TryParse(__instance.modData["{this.ModManifest.UniqueID}/base-radius"], out int baseRadius);
+                    float.TryParse(__instance.modData["{this.ModManifest.UniqueID}/base-radius"], out float baseRadius);
                     float radius = baseRadius * _config.FurnitureLightRadius;
                     Color color = __instance.lightSource.color.Value;
                     string id = __instance.lightSource.Id;
@@ -98,7 +98,7 @@ namespace LightRadiusMod
                         __instance.modData.Add("{this.ModManifest.UniqueID}/base-radius", __instance.lightSource.radius.Value.ToString());
                     int textureIndex = __instance.lightSource.textureIndex.Value;
                     Vector2 position = __instance.lightSource.position.Value;
-                    int.TryParse(__instance.modData["{this.ModManifest.UniqueID}/base-radius"], out int baseRadius);
+                    float.TryParse(__instance.modData["{this.ModManifest.UniqueID}/base-radius"], out float baseRadius);
                     float radius = baseRadius * _config.ObjectLightRadius;
                     Color color = __instance.lightSource.color.Value;
                     string id = __instance.lightSource.Id;
@@ -121,8 +121,8 @@ namespace LightRadiusMod
             configMenu.Register(
                 mod: this.ModManifest,
                 reset: () => this.Config = new ModConfig(),
-                save: () => this.Helper.WriteConfig(this.Config)//,
-                // titleScreenOnly: true
+                save: () => this.Helper.WriteConfig(this.Config),
+                titleScreenOnly: true
             );
             
             configMenu.AddNumberOption(
